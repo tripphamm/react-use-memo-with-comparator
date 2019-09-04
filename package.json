@@ -1,6 +1,9 @@
 {
   "name": "react-use-memo-with-comparator",
-  "repository": "https://github.com/tripphamm/react-use-memo-with-comparator",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tripphamm/react-use-memo-with-comparator"
+  },
   "version": "0.1.1",
   "main": "dist/index.js",
   "module": "dist/react-use-memo-with-comparator.esm.js",
