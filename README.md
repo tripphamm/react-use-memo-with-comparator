@@ -57,3 +57,7 @@ In order for React to recognize that these values are practically the same, Reac
 For example, you might know that your values are not very complicated and that performing a deep-equality check wouldn't cause a perf issue. Or you might know that every one of your values has an `id` prop and that if two values have the same `id`, they can be treated as equal.
 
 Maybe you're publishing a component to NPM and you don't want your users to have memoize the values that they're sending to you.
+
+## See also
+
+A similar concept for `React.useEffect` - [react-use-effect-with-comparator](https://www.npmjs.com/package/react-use-effect-with-comparator)
