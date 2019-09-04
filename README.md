@@ -4,6 +4,8 @@ It's `React.useMemo` except that it takes a custom comparator-function so that y
 
 ## Quick start
 
+> Caution: this hook circumvents some of the guardrails that React put in place. Use it only if you're sure about what you're doing.
+
 ```js
 const ShoppingCart = props => {
   const {
@@ -19,6 +21,7 @@ const ShoppingCart = props => {
       computeTotalPrice(items);
     },
     [items],
+    // custom comparison function
     (prevDeps, currentDeps) => {
       const [prevItems] = prevDeps;
       const [currentItems] = currentDeps;
@@ -37,14 +40,15 @@ const ShoppingCart = props => {
 
 `React.useMemo` is a performance optimization that can _remember_ the result of a previous computation so that you don't need to re-compute on each render. You pass it an array of values that are used in the computation (the _dependency array_), and it will only re-run the computation if it thinks that one of those values has changed. Simple enough.
 
-However, we have no control over the logic that it uses in order to decide if the values in the dependency array have materially changed or not. `React.useMemo` uses _referential equality_ to determine whether a previous value is the same as the current value. Referential equality comparisons are super fast, but will fail to recognize when two values are _practically the same_ but not _strictly the same_.
+However, we have no control over the logic that it uses in order to decide if the values in the dependency array have materially changed or not. `React.useMemo` uses _referential equality_ to determine whether a previous value is the same as the current value. Referential-equality comparisons are super fast, but will fail to recognize when two values are _practically the same_ but not _strictly the same_.
 
 e.g.
 
 ```js
 // triple-equals demonstrates referential equality
 
-// even though these objects are practically the same, they are not strictly the same object
+// even though these objects are practically the same,
+// they are not strictly the same object
 // so these return `false`
 { a: 'apple' } === { a: 'apple' } // false
 [1, 2, 3] === [1, 2, 3] // false
